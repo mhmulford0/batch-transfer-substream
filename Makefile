@@ -1,6 +1,6 @@
-ENDPOINT ?= mainnet.eth.streamingfast.io:443
-START_BLOCK ?= 12292922
-STOP_BLOCK ?= +10
+ENDPOINT ?= arb-one.streamingfast.io:443
+START_BLOCK ?= 22207818
+STOP_BLOCK ?= +800
 
 .PHONY: build
 build:
@@ -8,11 +8,11 @@ build:
 
 .PHONY: run
 run: build
-	substreams run -e $(ENDPOINT) substreams.yaml map_block -s $(START_BLOCK) -t $(STOP_BLOCK)
+	substreams run -e $(ENDPOINT) substreams.yaml map_transfer -s $(START_BLOCK) -t $(STOP_BLOCK)
 
 .PHONY: gui
 gui: build
-	substreams gui -e $(ENDPOINT) substreams.yaml map_block -s $(START_BLOCK) -t $(STOP_BLOCK)
+	substreams gui -e $(ENDPOINT) substreams.yaml map_transfer -s $(START_BLOCK) -t $(STOP_BLOCK)
 
 .PHONY: protogen
 protogen:

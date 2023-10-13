@@ -1,11 +1,11 @@
 specVersion: v0.1.0
 package:
-  name: 'substreams_ethereum_quickstart'
+  name: "substreams_ethereum_quickstart"
   version: v1.0.0
 
 protobuf:
   files:
-    - block_meta.proto
+    - erc721.proto
   importPaths:
     - ./proto
 
@@ -15,9 +15,9 @@ binaries:
     file: ./target/wasm32-unknown-unknown/release/substreams.wasm
 
 modules:
-  - name: map_block
+  - name: map_transfers
     kind: map
     inputs:
       - source: sf.ethereum.type.v2.Block
     output:
-      type: proto:acme.block_meta.v1.BlockMeta
+      type: proto:eth.erc721.v1.Transfers
