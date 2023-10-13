@@ -2,16 +2,12 @@ mod abi;
 mod pb;
 use hex_literal::hex;
 use pb::eth::erc1155::v1 as erc1155;
-use substreams::{key, prelude::*};
-use substreams::{log, store::StoreAddInt64, Hex};
+use substreams::Hex;
 
 use substreams_ethereum::pb::sf::ethereum::r#type::v2 as eth;
 
 const TRACKED_CONTRACT: [u8; 20] = hex!("aBe3b6b8EEDeB953046e3C5E83FbCE0cF9625E64");
-const NULL_ADDRESS: &str = "0000000000000000000000000000000000000000";
-fn generate_key(holder: &String) -> String {
-    return format!("total:{}:{}", holder, Hex(TRACKED_CONTRACT));
-}
+
 
 #[substreams::handlers::map]
 fn map_transfers(
