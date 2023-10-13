@@ -1,6 +1,6 @@
 ENDPOINT ?= sepolia.eth.streamingfast.io:443
 START_BLOCK ?= 4333100
-STOP_BLOCK ?= 4333137 
+STOP_BLOCK ?= 4333139
 
 .PHONY: build
 build:
