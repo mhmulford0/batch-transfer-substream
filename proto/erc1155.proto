@@ -1,0 +1,17 @@
+syntax = "proto3";
+
+package eth.erc1155.v1;
+
+message BatchTransfers {
+  repeated BatchTransfer batch_transfers = 1;
+}
+
+message BatchTransfer {
+  string operator = 1;
+  string from = 2;
+  string to = 3;
+  repeated uint64 ids = 4;
+  repeated uint64 values = 5;
+  string trx_hash = 6;
+  uint64 ordinal = 7;
+}

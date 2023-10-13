@@ -805,6 +805,8 @@ dependencies = [
  "hex-literal",
  "num-bigint",
  "prost",
+ "serde",
+ "serde_json",
  "substreams",
  "substreams-database-change",
  "substreams-ethereum",
