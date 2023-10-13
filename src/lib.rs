@@ -21,6 +21,21 @@ fn map_transfers(
         .events::<abi::erc1155::events::TransferBatch>(&[&TRACKED_CONTRACT])
         .map(|(batch_transfer, log)| {
             substreams::log::info!("ERC1155 Batch Transfer seen");
+          
+
+
+            let operator_hex = Hex::encode(&batch_transfer.operator);
+            let from_hex = Hex::encode(&batch_transfer.from);
+            let to_hex = Hex::encode(&batch_transfer.to);
+            let ids: Vec<u64> = batch_transfer.ids.iter().map(|id| id.to_u64()).collect();
+            let values: Vec<u64> = batch_transfer.values.iter().map(|val| val.to_u64()).collect();
+            let trx_hash_hex = Hex::encode(&log.receipt.transaction.hash);
+            let ordinal = log.block_index() as u64;
+            
+            substreams::log::info!(
+                "BatchTransfer {{\n  operator: {},\n  from: {},\n  to: {},\n  ids: {:?},\n  values: {:?},\n  trx_hash: {},\n  ordinal: {}\n}}",
+                operator_hex, from_hex, to_hex, ids, values, trx_hash_hex, ordinal
+            );
             erc1155::BatchTransfer {
                 operator: Hex::encode(&batch_transfer.operator),
                 from: Hex::encode(&batch_transfer.from),
@@ -45,20 +60,4 @@ fn map_transfers(
     println!("{:?}", batch_transfers);
 
     Ok(Some(erc1155::BatchTransfers { batch_transfers }))
-}
-
-#[substreams::handlers::store]
-fn store_transfers(transfers: erc1155::BatchTransfers, s: StoreAddInt64) {
-    log::info!("NFT holders state builder");
-    for transfer in transfers.batch_transfers {
-        if transfer.from != NULL_ADDRESS {
-            log::info!("Found a transfer out {}", Hex(&transfer.trx_hash));
-            s.add(transfer.ordinal, generate_key(&transfer.from), -1);
-        }
-
-        if transfer.to != NULL_ADDRESS {
-            log::info!("Found a transfer in {}", Hex(&transfer.trx_hash));
-            s.add(transfer.ordinal, generate_key(&transfer.to), 1);
-        }
-    }
 }
