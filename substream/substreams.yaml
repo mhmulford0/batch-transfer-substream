@@ -21,4 +21,4 @@ modules:
     inputs:
       - source: sf.ethereum.type.v2.Block
     output:
-      type: proto:eth.erc1155.v1.Transfers
+      type: proto:eth.erc1155.v1.BatchTransfer

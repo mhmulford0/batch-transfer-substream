@@ -1,7 +1,9 @@
 mod abi;
 mod pb;
-use hex_literal::hex;
+
 use pb::eth::erc1155::v1::{self as erc1155};
+
+use hex_literal::hex;
 use substreams::Hex;
 use substreams_ethereum::pb::eth::v2::Block;
 
@@ -15,6 +17,8 @@ fn map_transfers(
         .events::<abi::erc1155::events::TransferBatch>(&[&TRACKED_CONTRACT])
         .map(|(batch_transfer, log)| {
             substreams::log::info!("ERC1155 Batch Transfer seen");
+
+            substreams::log::println(Hex::encode(&log.receipt.transaction.hash));
 
             erc1155::BatchTransfer {
                 operator: Hex::encode(&batch_transfer.operator),
