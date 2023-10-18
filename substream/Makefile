@@ -16,7 +16,7 @@ gui: build
 
 .PHONY: protogen
 protogen:
-	substreams protogen ./substreams.yaml --exclude-paths="google,sf/substreams/rpc,sf/substreams/v1"
+	substreams protogen ./substreams.yaml --exclude-paths="sf/substreams,google"
 
 .PHONY: package
 package:

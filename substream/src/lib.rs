@@ -1,13 +1,8 @@
 mod abi;
 mod pb;
 use hex_literal::hex;
-use pb::eth::erc1155::v1::{self as erc1155, BatchTransfer, BatchTransfers};
-use substreams::store::{
-    self, DeltaProto, StoreNew, StoreSetIfNotExists, StoreSetIfNotExistsProto,
-};
+use pb::eth::erc1155::v1::{self as erc1155};
 use substreams::Hex;
-use substreams_database_change::pb::database::{table_change::Operation, DatabaseChanges};
-use substreams_ethereum::pb as ethpb;
 use substreams_ethereum::pb::sf::ethereum::r#type::v2 as eth;
 
 const TRACKED_CONTRACT: [u8; 20] = hex!("aBe3b6b8EEDeB953046e3C5E83FbCE0cF9625E64");

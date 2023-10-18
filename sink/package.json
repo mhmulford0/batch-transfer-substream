@@ -11,6 +11,7 @@
   "license": "MIT",
   "dependencies": {
     "@bufbuild/connect-web": "^0.13.0",
+    "@connectrpc/connect-node": "^1.1.2",
     "@substreams/core": "^0.2.0",
     "@substreams/manifest": "^0.1.0",
     "@types/node": "^18.17",
