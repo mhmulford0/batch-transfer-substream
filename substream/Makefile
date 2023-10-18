@@ -1,4 +1,3 @@
-DSN ?= psql://dev-node:insecure-change-me-in-prod@127.0.0.1:5432/substreams_example?sslmode=disable
 ENDPOINT ?= sepolia.eth.streamingfast.io:443
 START_BLOCK ?= 4333100
 STOP_BLOCK ?= 4333139
@@ -21,4 +20,5 @@ protogen:
 
 .PHONY: package
 package:
+	rm -f *.spkg
 	substreams pack ./substreams.yaml
