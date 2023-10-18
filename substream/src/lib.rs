@@ -3,13 +3,13 @@ mod pb;
 use hex_literal::hex;
 use pb::eth::erc1155::v1::{self as erc1155};
 use substreams::Hex;
-use substreams_ethereum::pb::sf::ethereum::r#type::v2 as eth;
+use substreams_ethereum::pb::eth::v2::Block;
 
 const TRACKED_CONTRACT: [u8; 20] = hex!("aBe3b6b8EEDeB953046e3C5E83FbCE0cF9625E64");
 
 #[substreams::handlers::map]
 fn map_transfers(
-    block: eth::Block,
+    block: Block,
 ) -> Result<Option<erc1155::BatchTransfers>, substreams::errors::Error> {
     let batch_transfers: Vec<_> = block
         .events::<abi::erc1155::events::TransferBatch>(&[&TRACKED_CONTRACT])
